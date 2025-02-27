@@ -1,0 +1,41 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Oo]bj/
+[Bb]in/
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.log
+*.vs/
+.vscode/
+
+# Backup & deployment files
+# (recommended not to include these as they can be restored easily)
+*.pdb
+*.cache
+
+# Uncomment if needed
+# *.pdb
+# *.cache
+
+# Azure DevOps
+/.env
+/.npm/
+/.vscode/
+/.nuget/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
