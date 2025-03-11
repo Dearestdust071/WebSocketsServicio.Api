@@ -1,6 +1,7 @@
 ﻿using Fleck;
 using Newtonsoft.Json;
 using WebSocketsServicio.Api.Models;
+using System.Security.Cryptography;
 namespace WebSocketsServicio.Api
 {
     internal class Program
@@ -8,7 +9,7 @@ namespace WebSocketsServicio.Api
         // private static readonly Dictionary<string, List<IWebSocketConnection>> rooms = new Dictionary<string, List<IWebSocketConnection>>();
         // private static readonly List<IWebSocketConnection> clients = new List<IWebSocketConnection>();
         
-        private static readonly WebSocketServer server = new WebSocketServer("ws://192.168.40.114:9001");
+          private static readonly WebSocketServer server = new WebSocketServer("ws://0.0.0.0:9001");
 // tarea string seria el nombre de la room para nada mas buscarlo por nombre  y al ponerle room 1 ya tenemos sus valores+
             private static readonly List<ConnectionModel> users = new List<ConnectionModel>();
             private static readonly Dictionary<string, RoomModel> rooms = new Dictionary<string, RoomModel>();
@@ -21,6 +22,14 @@ namespace WebSocketsServicio.Api
             {
                 websocket.OnOpen = () =>
                 {
+                   
+                  string[] palabras = websocket.ConnectionInfo.Path.Remove(0,1).Split("+");
+                  string id = palabras[0];
+                  string room = palabras[1];
+                  Console.WriteLine($"El usuario {id} se ha unido a la room: {room}");
+
+
+
                     var connectionModel = new ConnectionModel(websocket.ConnectionInfo.Path, websocket);
                     users.Add(connectionModel);
                     Console.WriteLine($"Join: {websocket.ConnectionInfo.Path}");
