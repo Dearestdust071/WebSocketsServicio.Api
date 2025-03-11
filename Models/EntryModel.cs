@@ -1,18 +1,21 @@
-namespace WebSocketsServicio.Api.Models
+namespace QuickType
 {
 
-    public class EntryModel
+    public partial class Actividades
     {
-
-        public required int Id {get; set;}
-        public required string Color {get;set;}
-
-
-        public EntryModel(int id, string color)
-        {
-            Id = id;
-            Color = color;
-        }
+        public Tareas Tareas { get; set; }
     }
 
+    public partial class Tareas
+    {
+        public string Nombre { get; set; }
+        public DateTimeOffset? Fecha_creacion { get; set; }
+        public string Estado { get; set; }
+        public List<Responsable> Responsables { get; set; }
+    }
+
+    public partial class Responsable
+    {
+        public string Nombre { get; set; }
+    }
 }

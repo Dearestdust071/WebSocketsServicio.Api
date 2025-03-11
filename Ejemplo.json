@@ -1,0 +1,23 @@
+{
+    
+    "User":{
+        "Nombre": "Jorge",
+        "Actividades":[
+            {
+                "Nombre":"Refactorizar modelos del servicio",
+                "Fecha_creacion": "2020-10-20",
+                "Estado":"Progreso"
+            },
+            {
+                "Nombre":"Refactorizar base de datos",
+                "Fecha_creacion": "2020-10-20",
+                "Estado":"Progreso"
+            },
+            {
+                "Nombre":"Agregar codigo de no se la verdad",
+                "Fecha_creacion": "2020-10-20",
+                "Estado":"Progreso"
+            }
+        ]
+    }
+}

@@ -8,45 +8,47 @@ namespace WebSocketsServicio.Api
         // private static readonly Dictionary<string, List<IWebSocketConnection>> rooms = new Dictionary<string, List<IWebSocketConnection>>();
         // private static readonly List<IWebSocketConnection> clients = new List<IWebSocketConnection>();
         
-        private static readonly WebSocketServer server = new WebSocketServer("ws://192.168.101.7:9001");
+        private static readonly WebSocketServer server = new WebSocketServer("ws://192.168.40.114:9001");
+// tarea string seria el nombre de la room para nada mas buscarlo por nombre  y al ponerle room 1 ya tenemos sus valores+
+            private static readonly List<ConnectionModel> users = new List<ConnectionModel>();
+            private static readonly Dictionary<string, RoomModel> rooms = new Dictionary<string, RoomModel>();
 
-        private static readonly List<IWebSocketConnection> users = new List<IWebSocketConnection>();
-
-
+    
         // Identificador valor
         static void Main(string[] args)
         {
-            server.Start(connection =>
+            server.Start(websocket =>
             {
-                connection.OnOpen = () =>
+                websocket.OnOpen = () =>
                 {
-                    users.Add(connection);
-                    
-                    Console.WriteLine($"Join: {connection.ConnectionInfo.Id}");
+                    var connectionModel = new ConnectionModel(websocket.ConnectionInfo.Path, websocket);
+                    users.Add(connectionModel);
+                    Console.WriteLine($"Join: {websocket.ConnectionInfo.Path}");
                 };
 
-                connection.OnClose = () =>
+                websocket.OnClose = () =>
                 {
-                    users.Remove(connection);
-                    Console.WriteLine($"Out: {connection.ConnectionInfo.Id}");
+                    // users.Remove(websocket);
+                    Console.WriteLine($"Out: {websocket.ConnectionInfo.Id}");
                 };
-                connection.OnMessage = (string mensaje_del_cliente) =>
+                websocket.OnMessage = (string mensaje_del_cliente) =>
                 {
 
-                  EntryModel entryModel = JsonConvert.DeserializeObject<EntryModel>(mensaje_del_cliente);
-                    foreach (IWebSocketConnection user in users)
-                    {
-                        if (connection != user)
-                        {
-                            var message = new 
-                            {
-                                Id = entryModel.Id,
-                                Color = entryModel.Color
-                            };
-                            string jsonMessage = JsonConvert.SerializeObject(message);
-                            user.Send(jsonMessage);
-                        }
-                    }
+                //   EntryModel entryModel = JsonConvert.DeserializeObject<EntryModel>(mensaje_del_cliente);
+                //     foreach (IWebSocketConnection user in users)
+                //     {
+                //         if (connection != user)
+                //         {
+                //             var message = new 
+                //             {
+                //                 Id = entryModel.Id,
+                //                 Color = entryModel.Color,
+                //                 User = entryModel.User
+                //             };
+                //             string jsonMessage = JsonConvert.SerializeObject(message);
+                //             user.Send(jsonMessage);
+                //         }
+                //     }
 
                 };
             });

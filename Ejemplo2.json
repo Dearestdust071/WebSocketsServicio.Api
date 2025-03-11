@@ -1,0 +1,18 @@
+{
+    "Tareas":{
+        "Nombre": "crear base de datos",
+        "Fecha_creacion": "2020-11-20",
+        "Estado":"Completado",
+        "Responsables":[
+            {
+                "Nombre": "Jorge"
+            },
+            {
+                "Nombre": "Jorge"
+            },
+            {
+                "Nombre": "Jorge"
+            }
+        ]
+    }
+}
