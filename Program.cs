@@ -23,16 +23,17 @@ namespace WebSocketsServicio.Api
                 websocket.OnOpen = () =>
                 {
                    
-                  string[] palabras = websocket.ConnectionInfo.Path.Remove(0,1).Split("+");
-                  string id = palabras[0];
-                  string room = palabras[1];
-                  Console.WriteLine($"El usuario {id} se ha unido a la room: {room}");
+                //   string[] palabras = websocket.ConnectionInfo.Path.Remove(0,1).Split("+");
+                //   string id = palabras[0];
+                // //   string room = palabras[1];
+                // //   Console.WriteLine($"El usuario {id} se ha unido a la room: {room}");
 
 
 
-                    var connectionModel = new ConnectionModel(websocket.ConnectionInfo.Path, websocket);
+                    var connectionModel = new ConnectionModel(websocket.ConnectionInfo.Path.Remove(0,1), websocket);
                     users.Add(connectionModel);
                     Console.WriteLine($"Join: {websocket.ConnectionInfo.Path}");
+                    websocket.Send("HOLA");
                 };
 
                 websocket.OnClose = () =>
